@@ -1,0 +1,27 @@
+syntax = "proto3";
+package category;
+
+option java_package = "com.dplaps.rpc.proto.base";
+option java_outer_classname = "CategoryProto";
+
+
+service CategoryService {
+  rpc findCatg(CategoryRequest) returns (CatgTree) {}
+  rpc findCatgs(Empty) returns (CatgTrees) {}
+}
+message Empty {
+}
+
+message CategoryRequest {
+  int32 id = 1;
+}
+
+message CatgTree {
+  string name = 1;
+  string color = 2;
+  repeated CatgTree subClasses = 3;
+}
+
+message CatgTrees {
+  map<int64, CatgTree>  catgs = 1;
+}

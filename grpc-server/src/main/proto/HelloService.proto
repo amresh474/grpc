@@ -1,0 +1,39 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.grpc;
+
+message HelloRequest {
+  string firstName = 1;
+  string lastName = 2;
+}
+message HelloResponse {
+  string greeting = 1;
+}
+message SkuAttributeRequest {
+  string skuCode = 1;
+  string key = 2;
+  string value = 3;
+  PhoneType ptype = 4;
+  map<string, string> projects = 5;
+}
+enum PhoneType {
+  MOBILE = 0;
+  LANDLINE = 1;
+}
+message SkuAttributeRes {
+  string skuCode = 1;
+  string key = 2;
+  string value = 3;
+  PhoneType ptype = 4;
+  map<string, string> projects = 5;
+  string type = 6;
+}
+message SkuAttributePayload {
+  repeated SkuAttributeRequest skuAttributeRequest = 1;
+  string type = 2;
+}
+service HelloService {
+  rpc hello(HelloRequest) returns (HelloResponse);
+  rpc bulkAddOrUpdateSkuAttributes (SkuAttributePayload) returns (SkuAttributeRes) {
+  }
+}

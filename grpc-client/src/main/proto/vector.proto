@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package vectors;
+
+option java_package = "com.pkt.rpc.proto.base";
+option java_outer_classname = "VectorProto";
+
+service VectorService {
+  rpc GetVectorStream(VectorsRequest) returns (stream Vector) {}
+
+  rpc GetVectors(VectorsRequest) returns (Vectors) {}
+}
+
+message VectorsRequest {
+  int64 seed = 1;
+  int32 number_of_vectors = 2;
+}
+
+message Point {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message Vector {
+  Point start = 1;
+  Point end = 2;
+}
+
+message Vectors {
+  repeated Vector vectors = 1;
+}
